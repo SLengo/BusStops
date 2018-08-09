@@ -1,0 +1,126 @@
+﻿<Window x:Class="RouteMarksViewer.Views.MarksView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer.Views"
+        xmlns:customs="clr-namespace:RouteMarksViewer.CustomControls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+        Icon="{StaticResource app_icon}"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" Style="{StaticResource CustomWindowStyle}"
+        Title="{Binding Route.Name}" Height="400" Width="1100">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" Name="mgrid_col_0" />
+            <ColumnDefinition Width="Auto" Name="mgrid_col_1" />
+            <ColumnDefinition Width="Auto" Name="mgrid_col_2" />
+        </Grid.ColumnDefinitions>
+        <Grid Name="MainGrid" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ToolBar Grid.Row="0" Name="RouteTabToolBar" Height="30">
+                <Button 
+                    Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                    Command="{Binding AddMarkCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Content="Добавить остановку" />
+                    </Button.ToolTip>
+                    <Image Source="../assets/icons/add.png"></Image>
+                </Button>
+                <Button 
+                    Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                    Command="{Binding EditMarkCommand}"
+                                CommandParameter="{Binding ElementName=MarksDataGrid, Path=SelectedItem}">
+                    <Button.ToolTip>
+                        <ToolTip Content="Редактировать остановку" />
+                    </Button.ToolTip>
+                    <Image Source="../assets/icons/edit.png"></Image>
+                </Button>
+                <Button 
+                    Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                    Command="{Binding DeleteMarkCommand}"
+                                CommandParameter="{Binding ElementName=MarksDataGrid, Path=SelectedItem}">
+                    <Button.ToolTip>
+                        <ToolTip Content="Удалить остановку" />
+                    </Button.ToolTip>
+                    <Image Source="../assets/icons/remove.png"></Image>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding SaveDataGridToE}"
+                          CommandParameter="{Binding ElementName=MarksDataGrid, Path=.}">
+                    <Button.ToolTip>
+                        <ToolTip Content="Сохранить в Excel" />
+                    </Button.ToolTip>
+                    <Image Source="../assets/icons/excel.png"></Image>
+                </Button>
+                <Separator/>
+                <ToggleButton Command="{Binding ShowMapCommand}">
+                    <ToggleButton.ToolTip>
+                        <ToolTip Content="Показать/скрыть карту" />
+                    </ToggleButton.ToolTip>
+                    <Image Source="../assets/icons/map_black.png"></Image>
+                </ToggleButton>
+                <Button 
+                    Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                    Name="SaveMap" Command="{Binding SaveMapCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Content="Сохранить карту и расположение остановок" />
+                    </Button.ToolTip>
+                    <Image Source="../assets/icons/map_save.png"></Image>
+                </Button>
+            </ToolBar>
+            <DataGrid Name="MarksDataGrid" Grid.Row="1" ItemsSource="{Binding CurrnetMarks}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  FontSize="15" CanUserSortColumns="False" AllowDrop="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Имя остановки" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Идентификатор остановки" Binding="{Binding MarkSerial}" />
+                    <DataGridTextColumn Header="Порядковый номер остановки" Binding="{Binding MarkNumber}" />
+                    <DataGridTextColumn Header="Имя маршрута" Binding="{Binding Route.Name}" />
+                    <DataGridTextColumn Header="Эталонное время после пред. остановки"
+                                    Binding="{Binding EthalonTime, Converter={StaticResource TimeStampConvertor},
+                    ConverterParameter=1}" />
+                    <DataGridTextColumn Header="Допустимая задержка"
+                                    Binding="{Binding EthalonWindow, Converter={StaticResource TimeStampConvertor},
+                    ConverterParameter=1}" />
+                    <DataGridTextColumn Header="Дата добавления"
+                                    Binding="{Binding AddingDate, Converter={StaticResource TimeStampConvertor}}" />
+                </DataGrid.Columns>
+                <DataGrid.InputBindings>
+                    <KeyBinding
+                            Key="Enter"
+                            Command="{Binding EditMarkCommand}"
+                            CommandParameter="{Binding ElementName=MarksDataGrid, Path=SelectedItem}"
+                            />
+                </DataGrid.InputBindings>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction x:Name="interactivityFix"
+                                        Command="{Binding EditMarkCommand}"
+                                CommandParameter="{Binding ElementName=MarksDataGrid, Path=SelectedItem}"
+                                        />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="MouseMove">
+                        <ei:CallMethodAction
+                        TargetObject="{Binding}"
+                        MethodName="MarksDataGrid_PreviewMouseMove"
+                        />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </DataGrid>
+        </Grid>
+        <GridSplitter Grid.Column="1" Name="RouteMarksGridSplitter" ShowsPreview="False" Visibility="Collapsed"
+                       Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Cursor="SizeWE" />
+        <customs:RouteMap x:Name="CurrentRouteMap" Visibility="Collapsed" CurrentUser="{Binding CurrentUser}"
+                          Grid.Column="2"  CurrentMap="{Binding CurrentMapCollection, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>

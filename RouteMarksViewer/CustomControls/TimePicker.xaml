@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="RouteMarksViewer.CustomControls.TimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RouteMarksViewer.CustomControls"
+             mc:Ignorable="d"  Name="UserControl"
+             d:DesignHeight="50" d:DesignWidth="140">
+    <Grid>
+        <!--Time picker-->
+        <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+            <StackPanel Orientation="Vertical" Margin="2">
+                <ComboBox Width="40" IsEditable="True" ItemsSource="{Binding ElementName=UserControl, Path=HoursCB}">
+                    <ComboBox.Text>
+                        <Binding Path="Hours" ElementName="UserControl" Mode="Default">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
+                <Label Foreground="{StaticResource MyMainFont}" Content="ч" HorizontalContentAlignment="Center"  />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <ComboBox Width="40" IsEditable="True" ItemsSource="{Binding ElementName=UserControl, Path=MinutesCB}">
+                    <ComboBox.Text>
+                        <Binding Path="Minutes" ElementName="UserControl" Mode="Default">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
+                <Label Foreground="{StaticResource MyMainFont}" Content="мин" HorizontalContentAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <ComboBox Width="40" IsEditable="True" ItemsSource="{Binding ElementName=UserControl, Path=SecondsCB}">
+                    <ComboBox.Text>
+                        <Binding Path="Seconds" ElementName="UserControl" Mode="Default">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
+                <Label Foreground="{StaticResource MyMainFont}" Content="сек" HorizontalContentAlignment="Center"  />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

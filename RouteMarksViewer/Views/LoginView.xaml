@@ -1,0 +1,41 @@
+﻿<Window x:Class="RouteMarksViewer.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer.Views" Name="LoginWindow"
+        WindowStartupLocation="CenterScreen"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:b="clr-namespace:RouteMarksViewer.Behaviors"
+        mc:Ignorable="d" Icon="{StaticResource app_icon}" Style="{StaticResource CustomWindowStyle}"
+        Title="Введите ваш логин и пароль" Height="200" Width="350">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5" 
+                    VerticalAlignment="Center">
+            <Label Content="Логин" HorizontalContentAlignment="Center" 
+                   Foreground="{StaticResource MyMainFont}" />
+            <TextBox Name="LoginTB" Text="{Binding Login, Mode=TwoWay}"  >
+                <TextBox.InputBindings>
+                    <KeyBinding
+                            Key="Enter"
+                            Command="{Binding OkCommand}"
+                            />
+                </TextBox.InputBindings>
+            </TextBox>
+            <Label Content="Пароль" HorizontalContentAlignment="Center"
+                   Foreground="{StaticResource MyMainFont}" />
+            <PasswordBox Name="PasswordPB">
+                <i:Interaction.Behaviors>
+                    <b:PasswordBehavior Password="{Binding Password, Mode=TwoWay}" />
+                </i:Interaction.Behaviors>
+                <PasswordBox.InputBindings>
+                    <KeyBinding
+                            Key="Enter"
+                            Command="{Binding OkCommand}"
+                            />
+                </PasswordBox.InputBindings>
+            </PasswordBox>
+            <Button Content="OK" Margin="0,5,0,0" Command="{Binding OkCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,89 @@
+﻿<Window x:Class="RouteMarksViewer.Views.LogsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer.Views"
+        mc:Ignorable="d"
+        Icon="{StaticResource app_icon}" Style="{StaticResource CustomWindowStyle}"
+        Title="LogsView" Height="400" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ToolBarPanel DockPanel.Dock="Top" Grid.Row="0">
+            <ToolBar Height="30" ToolBarTray.IsLocked="True">
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Дата: "/>
+                    <DatePicker SelectedDate="{Binding SelectedDateTime}" />
+                </StackPanel>
+                <Separator Margin="5,0,0,0" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Пользователь: "/>
+                    <ComboBox Margin="2" Grid.Column="1" ItemsSource="{Binding Users}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Id"
+                          SelectedValue="{Binding SelectedUserId}"/>
+                </StackPanel>
+                <Separator />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Действие: "/>
+                    <ComboBox Margin="2" Grid.Column="1" ItemsSource="{Binding LogTypes}"
+                          DisplayMemberPath="TypeDescription"
+                          SelectedValuePath="Id"
+                          SelectedValue="{Binding SelectedLogTypeId}"/>
+                </StackPanel>
+
+                <Separator />
+                <Border BorderBrush="Black" CornerRadius="2">
+                    <Button Content="Применить" Command="{Binding ApplyLogsReport}" />
+                </Border>
+
+            </ToolBar>
+        </ToolBarPanel>
+        <DataGrid Name="LogsDataGrid" Grid.Row="1" ItemsSource="{Binding Logs}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  FontSize="15">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding AddingDate, Converter={StaticResource TimeStampConvertor}}" />
+                <DataGridTextColumn Header="ID пользователя" Binding="{Binding UserId}" />
+                <DataGridTextColumn Header="Описание действия" Binding="{Binding Action}" />
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Логин пользователя" />
+                            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MyMainFont}" 
+                               Text="{Binding User.Login}"
+                               />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,3,0,0">
+                            <Label Content="Имя пользователя" />
+                            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MyMainFont}" 
+                               Text="{Binding User.Name}"
+                               />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical" Margin="0,3,0,0">
+                            <Label Content="OldValue" />
+                            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MyMainFont}" 
+                               Text="{Binding OldValue}"
+                               />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,3,0,0">
+                            <Label Content="NewValue" />
+                            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MyMainFont}" 
+                               Text="{Binding NewValue}"
+                               />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+
+        </DataGrid>
+    </Grid>
+</Window>

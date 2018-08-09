@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="RouteMarksViewer.CustomControls.RouteMap"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RouteMarksViewer.CustomControls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"  Name="UserControl"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ToolBar>
+            <Button 
+                Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                Name="ChooseMap" Click="ChooseMap_Click">
+                <Button.ToolTip>
+                    <ToolTip Content="Выбрать карту" />
+                </Button.ToolTip>
+                <Image Source="../assets/icons/map_black_plus.png"></Image>
+            </Button>
+            <Separator/>
+            <Button Name="ZoomIn" Click="ZoomIn_Click">
+                <Button.ToolTip>
+                    <ToolTip Content="Увеличить карту" />
+                </Button.ToolTip>
+                <Image Source="../assets/icons/zoom_in.png"></Image>
+            </Button>
+            <Button Name="ZoomOut" Click="ZoomOut_Click">
+                <Button.ToolTip>
+                    <ToolTip Content="Уменьшить карту" />
+                </Button.ToolTip>
+                <Image Source="../assets/icons/zoom_out.png"></Image>
+            </Button>
+            <Separator/>
+            <ToggleButton Name="ShowMarkLabels" Click="ShowMarkLabels_Click">
+                <ToggleButton.ToolTip>
+                    <ToolTip Content="Показывать подписи остановок" />
+                </ToggleButton.ToolTip>
+                <Image Source="../assets/icons/show.png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <Button 
+                Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                Name="ReMarks" Click="ReMarks_Click">
+                <Button.ToolTip>
+                    <ToolTip Content="Сбросить остановки" />
+                </Button.ToolTip>
+                <Image Source="../assets/icons/icon_refresh.png"></Image>
+            </Button>
+        </ToolBar>
+
+        <Grid Grid.Row="1" Name="ImageCanvasWorkGrid"
+              MouseWheel="ImagePlace_MouseWheel"
+              KeyDown="ImagePlace_KeyDown"
+              MouseRightButtonDown="ImageCanvasWorkGrid_MouseRightButtonDown"
+              MouseMove="WorkGrid_MouseMove">
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Canvas Name="ImageCanvas"
+                    MouseLeftButtonDown="ImageCanvasWorkGrid_MouseLeftButtonDown"
+                    Width="{Binding ActualWidth, ElementName=ImagePlace}"
+                    Height="{Binding ActualHeight, ElementName=ImagePlace}" >
+                    <Canvas.Background>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Image Name="ImagePlace"
+                                       SizeChanged="ImageCanvas_SizeChanged">
+                                    <Image.Source>
+                                        <Binding Path="MapImage" ElementName="UserControl" />
+                                    </Image.Source>
+                                </Image>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Canvas.Background>
+                </Canvas>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

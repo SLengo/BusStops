@@ -1,0 +1,39 @@
+﻿<Window x:Class="RouteMarksViewer.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer"
+        mc:Ignorable="d" Icon="{StaticResource app_icon}" WindowStartupLocation="CenterScreen"
+        Title="Welcome Window" Height="600" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            
+
+            <!--<StackPanel Grid.Column="0">
+                <TextBlock Text="Выберите COM" Margin="5" />
+                --><!--RadioButton Name="ComPortRadioButton" GroupName="WelcomeWindow" Content="COM" Margin="5"/-->
+                <!--RadioButton Name="UrlRadioButton" GroupName="WelcomeWindow" Content="URL" Margin="5" /-->
+                <!--RadioButton Name="CheckRadioButton" GroupName="WelcomeWindow" Content="text" Margin="5" /--><!--
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <ComboBox Name="ChooseComPortСomboBox" Width="150"></ComboBox>
+                --><!--TextBox Width="{Binding ElementName=ChooseComPortСomboBox, Path=Width}" Margin="5" /--><!--
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <Button Name="RefreshCOM" Grid.Column="2" Width="20" Click="RefreshCOM_Click">
+                    <Image Source="../assets/icons/icon_refresh.png" />
+                </Button>
+            </StackPanel>-->
+            <ScrollViewer Name="ScrollOutput">
+                <TextBox Name="OneWireOutPut" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Grid>
+
+        <!--Button Grid.Row="1" Content="Начать" Height="25" Click="Button_Click" /-->
+    </Grid>
+</Window>

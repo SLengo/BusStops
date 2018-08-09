@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="RouteMarksViewer.CustomControls.SchedulerVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RouteMarksViewer.CustomControls"
+             mc:Ignorable="d" Name="Scheduler"
+             d:DesignHeight="400" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Background" Value="{StaticResource MyMainBrush}" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <!---->
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="{StaticResource MyMainFont}" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer.Content>
+                    <Grid Name="CurrentGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+        
+                        <Grid Grid.Row="0" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock  Grid.Column="0"  Text="Пн" />
+                            </Border>
+                            <StackPanel Name="week_1" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1"  VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Grid.Column="0"  Text="Вт" />
+                            </Border>
+                            <StackPanel Name="week_2" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="2"  VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Grid.Column="0"  Text="Ср" />
+                            </Border>
+                            <StackPanel Name="week_3" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="3"  VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Grid.Column="0"  Text="Чт" />
+                            </Border>
+                            <StackPanel Name="week_4" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="4"  VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Grid.Column="0"  Text="Пт" />
+                            </Border>
+                            <StackPanel Name="week_5" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="5"  VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Grid.Column="0"  Text="Сб" />
+                            </Border>
+                            <StackPanel Name="week_6" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="6"  VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Grid.Column="0"  Text="Вс" />
+                            </Border>
+                            <StackPanel Name="week_7" Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                        </Grid>
+                
+                    </Grid> 
+                </ScrollViewer.Content>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

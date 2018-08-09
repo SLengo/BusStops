@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="RouteMarksViewer.CustomControls.DayOfWeekPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RouteMarksViewer.CustomControls"
+             mc:Ignorable="d"  Name="_DayOfWeekPicker"
+             d:DesignHeight="80" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="DayOfWeekStyle">
+            <Setter Property="Control.Width" Value="30" />
+            <Setter Property="Control.Margin" Value="5" />
+        </Style>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Vertical">
+            <Label Foreground="{StaticResource MyMainFont}" Content="{Binding ElementName=_DayOfWeekPicker, Path=LabelText}"
+                   Name="Sign"
+                   HorizontalContentAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Name="DaysOfWeek" HorizontalAlignment="Center">
+                <ToggleButton Click="Day_Checked" Content="Пн" Style="{StaticResource DayOfWeekStyle}" Name="Mon" />
+                <ToggleButton Click="Day_Checked" Content="Вт" Style="{StaticResource DayOfWeekStyle}" Name="Tue" />
+                <ToggleButton Click="Day_Checked" Content="Ср" Style="{StaticResource DayOfWeekStyle}" Name="Wed" />
+                <ToggleButton Click="Day_Checked" Content="Чт" Style="{StaticResource DayOfWeekStyle}" Name="Thu" />
+                <ToggleButton Click="Day_Checked" Content="Пт" Style="{StaticResource DayOfWeekStyle}" Name="Fri" />
+                <ToggleButton Click="Day_Checked" Content="Сб" Style="{StaticResource DayOfWeekStyle}" Name="Sat" />
+                <ToggleButton Click="Day_Checked" Content="Вс" Style="{StaticResource DayOfWeekStyle}" Name="Sun" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

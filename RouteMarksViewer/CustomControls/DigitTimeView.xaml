@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="RouteMarksViewer.CustomControls.DigitTimeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RouteMarksViewer.CustomControls"
+             mc:Ignorable="d" Name="DigitTime"
+             d:DesignHeight="70" d:DesignWidth="200">
+    <UserControl.Resources>
+        <Style x:Key="digital_7">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/Fonts/#Digital-7" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderThickness="2" BorderBrush="Black" Background="{StaticResource MyMainBrush}">
+            <TextBlock TextAlignment="Center" VerticalAlignment="Center"
+            FontSize="30" Foreground="{StaticResource MyMainFont}" Style="{DynamicResource digital_7}"
+            Text="{Binding ElementName=DigitTime, Path=CurrentTimeToShow}"/>
+        </Border>
+    </Grid>
+</UserControl>

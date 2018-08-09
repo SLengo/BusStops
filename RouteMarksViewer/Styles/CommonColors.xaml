@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RouteMarksViewer.Styles">
+    
+    <!-- blue colors theme-->
+
+    <!--<Color x:Key="MyMainBrushColor">#bebebe</Color>
+    <Color x:Key="MyMainBrushOverColor">#d2d2d2</Color>
+    <Color x:Key="MyMainBrushUpColor">#505050</Color>
+    <Color x:Key="MyMainBrushDarkColor">#a0a0a0</Color>
+    <Color x:Key="MyMainFontColor">#FFFFFF</Color>
+
+    --><!--Color x:Key="MyMainBrushColor">#557BBF</>
+    <Color x:Key="MyMainBrushOverColor">#7090c9</Color>
+    <Color x:Key="MyMainBrushUpColor">#92b3ef</Color>
+    <Color x:Key="MyMainBrushDarkColor">#4b72b7</Color>
+    <Color x:Key="MyMainFontColor">#FFFFFF</Color--><!--
+
+    <SolidColorBrush x:Key="MyMainBrush" x:Name="MyMainBrush" Color="{StaticResource MyMainBrushColor}" />
+    <SolidColorBrush x:Key="MyMainBrushOver" x:Name="MyMainBrushOver" Color="{StaticResource MyMainBrushOverColor}" />
+    <SolidColorBrush x:Key="MyMainBrushUp" x:Name="MyMainBrushUp" Color="{StaticResource MyMainBrushUpColor}" />
+    <SolidColorBrush x:Key="MyMainBrushDark" x:Name="MyMainBrushDark" Color="{StaticResource MyMainBrushDarkColor}" />
+    <SolidColorBrush x:Key="MyMainFont" x:Name="MyMainFont" Color="{StaticResource MyMainFontColor}" />-->
+    
+
+    <!-- dark orange colors theme-->
+    <!--
+    <Color x:Key="MyMainBrushColor">#000000</Color>
+    <Color x:Key="MyMainBrushOverColor">#684300</Color>
+    <Color x:Key="MyMainBrushUpColor">#d38900</Color>
+    <Color x:Key="MyMainBrushDarkColor">#ad7000</Color>
+    <Color x:Key="MyMainFontColor">#FFFFFF</Color>
+
+    <SolidColorBrush x:Key="MyMainBrush" x:Name="MyMainBrush" Color="{StaticResource MyMainBrushColor}" />
+    <SolidColorBrush x:Key="MyMainBrushOver" x:Name="MyMainBrushOver" Color="{StaticResource MyMainBrushOverColor}" />
+    <SolidColorBrush x:Key="MyMainBrushUp" x:Name="MyMainBrushUp" Color="{StaticResource MyMainBrushUpColor}" />
+    <SolidColorBrush x:Key="MyMainBrushDark" x:Name="MyMainBrushDark" Color="{StaticResource MyMainBrushDarkColor}" />
+    <SolidColorBrush x:Key="MyMainFont" x:Name="MyMainFont" Color="{StaticResource MyMainFontColor}" />
+    -->
+
+    <!-- red varyag colors theme-->
+    <!--
+    <Color x:Key="MyMainBrushColor">#FFFFFF</Color>
+    <Color x:Key="MyMainBrushOverColor">#ef777b</Color>
+    <Color x:Key="MyMainBrushUpColor">#ee373d</Color>
+    <Color x:Key="MyMainBrushDarkColor">#FFFFFF</Color>
+    <Color x:Key="MyMainFontColor">#000000</Color>
+
+    <SolidColorBrush x:Key="MyMainBrush" x:Name="MyMainBrush" Color="{StaticResource MyMainBrushColor}" />
+    <SolidColorBrush x:Key="MyMainBrushOver" x:Name="MyMainBrushOver" Color="{StaticResource MyMainBrushOverColor}" />
+    <SolidColorBrush x:Key="MyMainBrushUp" x:Name="MyMainBrushUp" Color="{StaticResource MyMainBrushUpColor}" />
+    <SolidColorBrush x:Key="MyMainBrushDark" x:Name="MyMainBrushDark" Color="{StaticResource MyMainBrushDarkColor}" />
+    <SolidColorBrush x:Key="MyMainFont" x:Name="MyMainFont" Color="{StaticResource MyMainFontColor}" />
+    -->
+
+    <!-- Light blue colors theme-->
+    
+    <Color x:Key="MyMainBrushColor">#FFFFFF</Color>
+    <Color x:Key="MyMainBrushOverColor">#ccddfc</Color>
+    <Color x:Key="MyMainBrushUpColor">#92b3ef</Color>
+    <Color x:Key="MyMainBrushDarkColor">#eaf0f9</Color>
+    <Color x:Key="MyMainFontColor">#000000</Color>
+
+    <SolidColorBrush x:Key="MyMainBrush" x:Name="MyMainBrush" Color="{StaticResource MyMainBrushColor}" />
+    <SolidColorBrush x:Key="MyMainBrushOver" x:Name="MyMainBrushOver" Color="{StaticResource MyMainBrushOverColor}" />
+    <SolidColorBrush x:Key="MyMainBrushUp" x:Name="MyMainBrushUp" Color="{StaticResource MyMainBrushUpColor}" />
+    <SolidColorBrush x:Key="MyMainBrushDark" x:Name="MyMainBrushDark" Color="{StaticResource MyMainBrushDarkColor}" />
+    <SolidColorBrush x:Key="MyMainFont" x:Name="MyMainFont" Color="{StaticResource MyMainFontColor}" />
+    
+
+</ResourceDictionary>

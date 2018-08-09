@@ -1,0 +1,46 @@
+﻿<Window x:Class="RouteMarksViewer.Views.AddRouteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer.Views"
+        Style="{StaticResource CustomWindowStyle}"
+        mc:Ignorable="d" Icon="{StaticResource app_icon}" WindowStartupLocation="CenterOwner"
+        Title="Добавление маршрута" Height="200" Width="350">
+    <Window.InputBindings>
+        <KeyBinding Key="Esc"
+                    Command="{Binding CancelCommand}"/>
+    </Window.InputBindings>
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="{StaticResource MyMainFont}" Content="Введите имя маршрута" Grid.Column="0"/>
+                <TextBox Name="EnterName" Grid.Column="1">
+                    <TextBox.InputBindings>
+                        <KeyBinding
+                            Key="Enter"
+                            Command="{Binding OkCommand}"
+                            />
+                    </TextBox.InputBindings>
+                    <TextBox.Text>
+                        <Binding Path="CurrentRoute.Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+
+            <StackPanel Margin="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button Content="OK" Margin="2" Width="50" Command="{Binding OkCommand}" />
+                <Button Content="Отмена" Margin="2" Width="75" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

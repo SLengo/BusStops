@@ -1,0 +1,94 @@
+﻿<Window x:Class="RouteMarksViewer.Views.AddMarkView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer.Views"
+        Icon="{StaticResource app_icon}" Style="{StaticResource CustomWindowStyle}"
+        xmlns:customs="clr-namespace:RouteMarksViewer.CustomControls"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="AddMarkView" Height="400" Width="400">
+    <Window.InputBindings>
+        <KeyBinding Key="Esc"
+                    Command="{Binding CancelCommand}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" HorizontalAlignment="Center" Foreground="{StaticResource MyMainFont}"
+               Content="{Binding CurrentRoute.Name}" ContentStringFormat="Метка для маршрута '{0}'" />
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="{StaticResource MyMainFont}" Content="Идентификатор остановки" Margin="2" Grid.Column="0" />
+                <TextBox Margin="2" Grid.Column="1">
+                    <TextBox.InputBindings>
+                        <KeyBinding
+                            Key="Enter"
+                            Command="{Binding OkCommand}"
+                            />
+                    </TextBox.InputBindings>
+                    <TextBox.Text>
+                        <Binding Path="CurrentMark.MarkSerial" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="{StaticResource MyMainFont}" Content="Имя остановки " Margin="2" Grid.Column="0" />
+                <TextBox Margin="2" Grid.Column="1">
+                    <TextBox.InputBindings>
+                        <KeyBinding
+                            Key="Enter"
+                            Command="{Binding OkCommand}"
+                            />
+                    </TextBox.InputBindings>
+                    <TextBox.Text>
+                        <Binding Path="CurrentMark.Name" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="{StaticResource MyMainFont}" Content="Время от пред. остановки" Margin="2" VerticalAlignment="Center" Grid.Column="0" />
+                <customs:TimePicker Grid.Column="1" CurrentTime="{Binding CurrentMark.EthalonTime, Mode=TwoWay}">
+                </customs:TimePicker>           
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="{StaticResource MyMainFont}" Content="Допустимая задержка" Margin="2" VerticalAlignment="Center" Grid.Column="0" />
+                <customs:TimePicker Grid.Column="1" CurrentTime="{Binding CurrentMark.EthalonWindow, Mode=TwoWay}">
+                </customs:TimePicker>
+
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="OK" Width="100" Margin="5" Command="{Binding OkCommand}" />
+                <Button Content="Отмена" Width="125" Margin="5" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

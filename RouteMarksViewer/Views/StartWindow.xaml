@@ -1,0 +1,175 @@
+﻿<Window x:Class="RouteMarksViewer.Views.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RouteMarksViewer"
+        xmlns:logview="clr-namespace:RouteMarksViewer.Models"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d" Icon="{StaticResource app_icon}" Style="{StaticResource CustomWindowStyle}"
+        Title="Bus stops - составление маршрутов общственного транспорта" Height="500" Width="900" WindowStartupLocation="CenterScreen"
+        >
+    <Grid Background="{StaticResource MyMainBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TabControl Name="WorkWindowTabControl" Grid.Row="0">
+            <TabItem Name="RouteTabItem">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding MakeLogAboutClick}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <logview:LogViewParameter LogTypeId="8" Action="click on RouteTabItem" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image Source="../assets/icons/map_marks_white_black_border.png" Width="25" />
+                        <TextBlock FontSize="20" Foreground="{StaticResource MyMainFont}" Text="Маршруты" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ToolBar Grid.Row="0" Name="RouteTabToolBar" Height="30">
+                            <Button Command="{Binding AddRouteCommand}"
+                                    Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Добавить маршрут" />
+                                </Button.ToolTip>
+                                <Image Source="../assets/icons/add.png"></Image>
+                            </Button>
+                            <Button Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}" 
+                                Command="{Binding EditRouteCommand}"
+                                CommandParameter="{Binding ElementName=RoutesDataGrid, Path=SelectedItem}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Редактировать маршрут" />
+                                </Button.ToolTip>
+                                <Image Source="../assets/icons/edit.png"></Image>
+                            </Button>
+                            <Button 
+                                Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2}"
+                                Command="{Binding DeleteRouteCommand}"
+                                CommandParameter="{Binding ElementName=RoutesDataGrid, Path=SelectedItem}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Удалить маршрут" />
+                                </Button.ToolTip>
+                                <Image Source="../assets/icons/remove.png"></Image>
+                            </Button>
+                            <Separator/>
+                            <Button
+                                
+                                Command="{Binding OpenMarkWindowCommand}"
+                                          CommandParameter="{Binding ElementName=RoutesDataGrid, Path=SelectedItem}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Метки маршрута" />
+                                </Button.ToolTip>
+                                <Image Source="../assets/icons/location.png" />
+                            </Button>
+                            <Button Command="{Binding OpenSchedulerWindowCommand}"
+                                          CommandParameter="{Binding ElementName=RoutesDataGrid, Path=SelectedItem}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Расписание маршрута" />
+                                </Button.ToolTip>
+                                <Image Source="../assets/icons/calendar.png" />
+                            </Button>
+                            <Separator/>
+                            <Button Command="{Binding SaveDataGridToE}"
+                          CommandParameter="{Binding ElementName=RoutesDataGrid, Path=.}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Сохранить в Excel" />
+                                </Button.ToolTip>
+                                <Image Source="../assets/icons/excel.png"></Image>
+                            </Button>
+
+                            <Separator/>
+
+                        </ToolBar>
+
+                        <DataGrid Name="RoutesDataGrid" Grid.Row="1" ItemsSource="{Binding Routes}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  FontSize="15">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                                <DataGridTextColumn Header="Имя маршрута" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Дата добавления" Binding="{Binding AddingDate, Converter={StaticResource TimeStampConvertor}}" />
+                            </DataGrid.Columns>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding OpenMarkWindowCommand}"
+                                        CommandParameter="{Binding ElementName=RoutesDataGrid, Path=SelectedItem}"
+                                        />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.InputBindings>
+                                <KeyBinding
+                            Key="Enter"
+                            Command="{Binding OpenMarkWindowCommand}"
+                            CommandParameter="{Binding ElementName=RoutesDataGrid, Path=SelectedItem}"
+                            />
+                            </DataGrid.InputBindings>
+                        </DataGrid>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Name="SettingsTabItem" 
+                     Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1|2|3}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding MakeLogAboutClick}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <logview:LogViewParameter LogTypeId="8" Action="click on SettingsTabItem" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image Source="../assets/icons/settings_gear.png" Width="25" />
+                        <TextBlock FontSize="20" Foreground="{StaticResource MyMainFont}" Text="Настройки" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ToolBar Height="30" Visibility="{Binding CurrentUser, Converter={StaticResource RoleToVisibilityConverter},
+                ConverterParameter=1}" Header="Администрирование">
+                            <Separator />
+                            <Button Command="{Binding OpenUsersManagementCommand}">
+                                <Image Source="../assets/icons/user.png" />
+                                <Button.ToolTip>
+                                    <ToolTip Content="Управление пользователями" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding OpenLogsViewCommand}">
+                                <Image Source="../assets/icons/logs.png" />
+                                <Button.ToolTip>
+                                    <ToolTip Content="Логи" />
+                                </Button.ToolTip>
+                            </Button>
+                        </ToolBar>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
