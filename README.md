@@ -1,5 +1,5 @@
 # BusStops
-Demonstration project (C#, WPF, Sqlite, MVVM)
+Demo project (C#, WPF, Sqlite, MVVM)
 
 Приложение представляет собой инструмент для составление расписаний общественного транспорта.
 Функционал:
